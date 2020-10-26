@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 2020_10_26_182034) do
   end
 
   create_table "visits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "business_id", null: false
     t.datetime "time_in"
     t.datetime "time_out"
     t.boolean "flagged", default: false
     t.boolean "employee", default: false
     t.integer "party_size"
-    t.bigint "user_id", null: false
-    t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_visits_on_business_id"
