@@ -20,7 +20,7 @@ function appendVisitToCurrentList(visit) {
     let btn = document.createElement("button")
     btn.className = "btn btn-outline-danger btn-sm float-right"
     btn.innerHTML = "CHECK OUT"
-    btn.addEventListener("click", e => checkOutVisit(e))
+    btn.addEventListener("click", e => postCheckOut(e))
     li.appendChild(btn)
     ul.appendChild(li)
 }
@@ -31,7 +31,23 @@ function createCurrentList(visits) {
     }
 }
 
-function checkOutVisit(e) {
-    debugger
+function postCheckOut(e) {
+    const visitId = e.target.parentElement.dataset.visitId
+    fetch(`http://localhost:3000/visits/${visitId}`, {
+                method: 'PATCH',
+                headers:  {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({time_out: "true", id: `${visitId}`})
+            })
+                .then(response => response.json())
+                    .then(result => console.log(removeFromList(result["id"])))
+                        .catch(err => console.log(err))
+}
+
+function removeFromList(id) {
+    const li = document.querySelector(`[data-visit-id="${id}"]`)
+    li.remove()
 }
 
