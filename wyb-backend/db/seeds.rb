@@ -25,27 +25,39 @@ Business.create(
 )
 
 User.create(
-    name: "Wick",
+    first_name: "Wick",
+    last_name: "Bushong",
     phone: "7138185446",
     email: "wickbushong@gmail.com"
 )
 
 User.create(
-    name: "Margaret",
+    first_name: "Margaret",
+    last_name: "Long",
     phone: "7138262161",
     email: "long.mkat@gmail.com"
 )
 
 User.create(
-    name: "Matt",
+    first_name: "Matt",
+    last_name: "Logan",
     phone: "1234567890",
     email: "matt@logan.com"
 )
 
 User.create(
-    name: "Robby",
+    first_name: "Robby",
+    last_name: "Cowan",
     phone: "9876543210",
     email: "robby@cowan.com"
+)
+
+Visit.create(
+    user_id: 1,
+    business_id: 1,
+    time_in: Time.now - 86400,
+    time_out: Time.now - 85000,
+    party_size: 2
 )
 
 Visit.create(
