@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", fetchActiveVisits())
+document.addEventListener("DOMContentLoaded", fetchActiveVisits(), activateForm())
 
 function fetchActiveVisits() {
     // NEEDS TO BE DYNAMIC URL
@@ -34,20 +34,49 @@ function createCurrentList(visits) {
 function postCheckOut(e) {
     const visitId = e.target.parentElement.dataset.visitId
     fetch(`http://localhost:3000/visits/${visitId}`, {
-                method: 'PATCH',
-                headers:  {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({time_out: "true", id: `${visitId}`})
-            })
-                .then(response => response.json())
-                    .then(result => console.log(removeFromList(result["id"])))
-                        .catch(err => console.log(err))
+            method: 'PATCH',
+            headers:  {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({time_out: "true", id: `${visitId}`})
+        })
+        .then(response => response.json())
+            .then(result => console.log(removeFromList(result["id"])))
+                .catch(err => console.log(err))
 }
 
 function removeFromList(id) {
     const li = document.querySelector(`[data-visit-id="${id}"]`)
     li.remove()
+}
+
+function activateForm() {
+    let form = document.querySelector("#check-in-form")
+    form.addEventListener("submit", e => {
+        postCheckIn(e)
+        e.preventDefault
+    })
+}
+
+function postCheckIn(e) {
+    const form = e.target
+    const body_obj = {
+        first_name: form.querySelector("#first-name"),
+        last_name: form.querySelector("#last-name"),
+        email: form.querySelector("#input-email"),
+        phone: form.querySelector("#input-phone")
+    }
+    fetch(`http://localhost:3000/visits`, {
+            method: 'POST',
+            headers:  {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(body_obj)
+        })
+        .then(response => response.json())
+            .then(result => console.log(result))
+                .catch(err => console.log(err))
 }
 
