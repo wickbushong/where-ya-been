@@ -59,6 +59,7 @@ function activateForm() {
     form.addEventListener("submit", e => {
         e.preventDefault
         postCheckIn(e)
+        e.target.reset()
     })
 }
 
@@ -86,7 +87,9 @@ function postCheckIn(e) {
             body: JSON.stringify(formData)
         })
         .then(response => response.json())
-            .then(result => console.log(result))
+            .then(result => {
+                appendVisitToCurrentList(result)
+            })
                 .catch(err => console.log(err))
 }
 
