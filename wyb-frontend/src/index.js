@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", console.log("loaded"), fetchActiveVisits())
+document.addEventListener("DOMContentLoaded", console.log("loaded"), fetchActiveVisits(), fetchBusinesses())
 
 function fetchActiveVisits() {
     console.log("hit fetchActiveVisits")
@@ -97,6 +97,10 @@ function toggleTabs() {
     let old = event.target.closest("ul").querySelector(".active")
     old.className = "nav-link"
     event.target.className += " active"
+}
+
+function togglePages() {
+    
 }
 
 function fetchBusinesses() {
