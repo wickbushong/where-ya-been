@@ -1,7 +1,16 @@
 class VisitsController < ApplicationController
     
     def create
-        binding.pry
+        user = User.find_or_create_by(user_params)
+        business = Business.find_by(id: business_params[:id])
+        visit = Visit.new(
+            user: user,
+            business: business,
+            time_in: Time.now
+        )
+        if visit.save
+            render json: visit.to_json()
+        end
     end
     
     def update
