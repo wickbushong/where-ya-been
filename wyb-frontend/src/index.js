@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", console.log("loaded"), fetchActiveVisits(), fetchBusinesses())
+document.addEventListener("DOMContentLoaded", console.log("loaded"), fetchActiveVisits(), activateForm(), fetchBusinesses())
 
 function fetchActiveVisits() {
     console.log("hit fetchActiveVisits")
@@ -90,9 +90,6 @@ function postCheckIn(e) {
                 .catch(err => console.log(err))
 }
 
-
-activateForm()
-
 function toggleTabs() {
     let old = event.target.closest("ul").querySelector(".active")
     old.className = "nav-link"
@@ -104,19 +101,15 @@ function toggleTabs() {
     newPage.style.display = "block"
 }
 
-function togglePages() {
-
-}
-
 function fetchBusinesses() {
     fetch(`http://localhost:3000/businesses`)
     .then(response => response.json())
-        .then(result => populateBusinessSelect(result))
+        .then(businessList => populateBusinessSelect(businessList))
             .catch(err => console.log(err))
 }
 
-function populateBusinessSelect(result) {
-    for (const business of result) {
+function populateBusinessSelect(businessList) {
+    for (const business of businessList) {
         appendBusinessOption(business)
     }
 }
