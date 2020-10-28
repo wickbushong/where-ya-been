@@ -1,8 +1,9 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", fetchActiveVisits(), activateForm())
+document.addEventListener("DOMContentLoaded", console.log("loaded"), fetchActiveVisits())
 
 function fetchActiveVisits() {
+    console.log("hit fetchActiveVisits")
     // NEEDS TO BE DYNAMIC URL
     fetch(BACKEND_URL+`/businesses/1`)
         .then(response => response.json())
@@ -32,6 +33,7 @@ function createCurrentList(visits) {
 }
 
 function postCheckOut(e) {
+    console.log("hit postCheckout")
     const visitId = e.target.parentElement.dataset.visitId
     fetch(`http://localhost:3000/visits/${visitId}`, {
             method: 'PATCH',
@@ -52,20 +54,28 @@ function removeFromList(id) {
 }
 
 function activateForm() {
+    console.log("hit activateForm")
     let form = document.querySelector("#check-in-form")
     form.addEventListener("submit", e => {
-        postCheckIn(e)
         e.preventDefault
+        postCheckIn(e)
     })
 }
 
 function postCheckIn(e) {
+    console.log("hit postCheckIn")
     const form = e.target
-    const body_obj = {
-        first_name: form.querySelector("#first-name"),
-        last_name: form.querySelector("#last-name"),
-        email: form.querySelector("#input-email"),
-        phone: form.querySelector("#input-phone")
+    const formData = {
+        user: {
+            first_name: form.querySelector("#first-name").value,
+            last_name: form.querySelector("#last-name").value,
+            email: form.querySelector("#input-email").value,
+            phone: form.querySelector("#input-phone").value
+        },
+        business: {
+            // DESPERATELY NEEDS TO BE DYNAMIC
+            id: "1"
+        }
     }
     fetch(`http://localhost:3000/visits`, {
             method: 'POST',
@@ -73,10 +83,18 @@ function postCheckIn(e) {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            body: JSON.stringify(body_obj)
+            body: JSON.stringify(formData)
         })
         .then(response => response.json())
             .then(result => console.log(result))
                 .catch(err => console.log(err))
 }
 
+
+activateForm()
+
+function toggleTabs() {
+    let old = event.target.closest("ul").querySelector(".active")
+    old.className = "nav-link"
+    event.target.className += " active"
+}
