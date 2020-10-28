@@ -98,3 +98,24 @@ function toggleTabs() {
     old.className = "nav-link"
     event.target.className += " active"
 }
+
+function fetchBusinesses() {
+    fetch(`http://localhost:3000/businesses`)
+    .then(response => response.json())
+        .then(result => populateBusinessSelect(result))
+            .catch(err => console.log(err))
+}
+
+function populateBusinessSelect(result) {
+    for (const business of result) {
+        appendBusinessOption(business)
+    }
+}
+
+function appendBusinessOption(business) {
+    let select = document.querySelector("select")
+    let option = document.createElement("option")
+    option.setAttribute("data-business-id", `${business.id}`)
+    option.innerHTML = `${business.name} - ${business.location}`
+    select.appendChild(option)
+}
