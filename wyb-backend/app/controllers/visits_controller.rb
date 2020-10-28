@@ -9,7 +9,7 @@ class VisitsController < ApplicationController
             time_in: Time.now
         )
         if visit.save
-            render json: visit.to_json()
+            render json: VisitSerializer.new(visit).to_serialized_json
         end
     end
     
