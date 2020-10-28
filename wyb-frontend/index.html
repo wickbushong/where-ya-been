@@ -13,14 +13,14 @@
           <a class="nav-link" href="#">WYB</a>
         </li>
         <li class="nav-item">
-          <a id="visit-log-nav" class="nav-link" onclick="toggleTabs()" href="#">Log</a>
+          <a id="visit-log-nav" class="nav-link" onclick="toggleTabs()" data-page-group="visit-log" href="#">Log</a>
         </li>
         <li class="nav-item">
-          <a id="business-select-nav" class="nav-link  active" onclick="toggleTabs(), fetchBusinesses()" href="#">Select Business</a>
+          <a id="business-select-nav" class="nav-link  active" onclick="toggleTabs()" data-page-group="business-select" href="#">Select Business</a>
         </li>
         
     </ul>
-    <div id="visit-log-page" class="container" style="display: none;">
+    <div id="visit-log-page" class="container" style="display: none;" data-page-group="visit-log" >
         <div class="row">
             <div class="col-sm">
                 <h2>CHECK IN</h2>
@@ -59,7 +59,7 @@
 
     <!-- NEW TAB -->
 
-    <div id="business-select-page" class="container">
+    <div id="business-select-page" class="container" data-page-group="business-select">
         <div class="row">
             <div class="col-sm">
                 <h2>BUSINESS SELECT</h2>

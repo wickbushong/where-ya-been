@@ -97,10 +97,15 @@ function toggleTabs() {
     let old = event.target.closest("ul").querySelector(".active")
     old.className = "nav-link"
     event.target.className += " active"
+    let pageGroup = event.target.dataset.pageGroup
+    let allPages = document.querySelectorAll(".container")
+    for (const page of allPages) {page.style.display = "none"}
+    let newPage = document.querySelector(`[data-page-group="${pageGroup}"].container`)
+    newPage.style.display = "block"
 }
 
 function togglePages() {
-    
+
 }
 
 function fetchBusinesses() {
