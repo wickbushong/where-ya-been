@@ -2,13 +2,6 @@ const BACKEND_URL = 'http://localhost:3000';
 
 document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateForm(), fetchBusinesses())
 
-function fetchActiveVisits(businessId) {
-    fetch(BACKEND_URL+`/businesses/${businessId}/visits`)
-        .then(response => response.json())
-            .then(data => createCurrentList(data))
-                .catch(err => console.log(err));
-}
-
 function createCurrentList(visits) {
     for (const visit of visits) {
         new Visit(visit).appendVisitToCurrentList()
@@ -44,7 +37,7 @@ function setBusiness(e) {
     let selectedOption = select.item(select.selectedIndex)
     let businessId = selectedOption.dataset.businessId
     clearCurrentList()
-    fetchActiveVisits(businessId)
+    Business.fetchActiveVisits(businessId)
     let list = document.querySelector("#current-list")
     list.setAttribute("data-business-id", `${businessId}`)
 }
