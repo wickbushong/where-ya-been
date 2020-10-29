@@ -19,8 +19,50 @@ class Visit {
         let btn = document.createElement("button")
         btn.className = "btn btn-outline-danger btn-sm float-right"
         btn.innerHTML = "CHECK OUT"
-        btn.addEventListener("click", e => postCheckOut(e))
+        btn.addEventListener("click", e => postCheckOut(e.target.parentElement.dataset.visitId))
         li.appendChild(btn)
         ul.appendChild(li)
+    }
+
+    static postCheckIn(form) {
+        const businessId = document.querySelector("#current-list").dataset.businessId
+        const formData = {
+            user: {
+                first_name: form.querySelector("#first-name").value,
+                last_name: form.querySelector("#last-name").value,
+                email: form.querySelector("#input-email").value,
+                phone: form.querySelector("#input-phone").value
+            },
+            business: {
+                id: `${businessId}`
+            }
+        }
+        fetch(`http://localhost:3000/visits`, {
+                method: 'POST',
+                headers:  {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+                .then(result => {
+                    new Visit(result).appendVisitToCurrentList()
+                })
+                    .catch(err => console.log(err))
+    }
+
+    static postCheckOut(visitId) {
+        fetch(`http://localhost:3000/visits/${visitId}`, {
+                method: 'PATCH',
+                headers:  {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({time_out: "true", id: `${visitId}`})
+            })
+            .then(response => response.json())
+                .then(result => console.log(removeFromList(result["id"])))
+                    .catch(err => console.log(err))
     }
 }
