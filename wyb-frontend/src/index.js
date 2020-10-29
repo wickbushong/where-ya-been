@@ -1,11 +1,9 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", console.log("loaded"), fetchActiveVisits(), activateForm(), fetchBusinesses())
+document.addEventListener("DOMContentLoaded", console.log("loaded"), activateBusinessSelect(), activateForm(), fetchBusinesses())
 
-function fetchActiveVisits() {
-    console.log("hit fetchActiveVisits")
-    // NEEDS TO BE DYNAMIC URL
-    fetch(BACKEND_URL+`/businesses/1`)
+function fetchActiveVisits(businessId) {
+    fetch(BACKEND_URL+`/businesses/${businessId}`)
         .then(response => response.json())
             .then(data => createCurrentList(data["active_visits"]))
                 .catch(err => console.log(err));
@@ -66,6 +64,7 @@ function activateForm() {
 function postCheckIn(e) {
     console.log("hit postCheckIn")
     const form = e.target
+    const businessId = document.querySelector("#current-list").dataset.businessId
     const formData = {
         user: {
             first_name: form.querySelector("#first-name").value,
@@ -74,8 +73,7 @@ function postCheckIn(e) {
             phone: form.querySelector("#input-phone").value
         },
         business: {
-            // DESPERATELY NEEDS TO BE DYNAMIC
-            id: "1"
+            id: `${businessId}`
         }
     }
     fetch(`http://localhost:3000/visits`, {
@@ -91,6 +89,26 @@ function postCheckIn(e) {
                 appendVisitToCurrentList(result)
             })
                 .catch(err => console.log(err))
+}
+
+function activateBusinessSelect() {
+    let form = document.querySelector("#business-select-form")
+    form.addEventListener("submit", e => {
+        e.preventDefault
+        setBusiness(e)
+        e.target.reset()
+        // SWITCH TO LOG TAB
+    })
+}
+
+function setBusiness(e) {
+    let select = e.target.querySelector("select")
+    let selectedOption = select.item(select.selectedIndex)
+    let businessId = selectedOption.dataset.businessId
+    clearCurrentList()
+    fetchActiveVisits(businessId)
+    let list = document.querySelector("#current-list")
+    list.setAttribute("data-business-id", `${businessId}`)
 }
 
 function toggleTabs() {
@@ -123,4 +141,11 @@ function appendBusinessOption(business) {
     option.setAttribute("data-business-id", `${business.id}`)
     option.innerHTML = `${business.name} - ${business.location}`
     select.appendChild(option)
+}
+
+function clearCurrentList() {
+    const list = document.querySelector("#current-list")
+    while (list.firstChild) {
+        list.removeChild(list.firstChild)
+    }
 }
