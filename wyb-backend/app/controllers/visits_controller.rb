@@ -1,5 +1,16 @@
 class VisitsController < ApplicationController
     
+    def index
+        if params[:business_id]
+            business = Business.find_by(id: params[:business_id])
+            visits = business.active_visits
+        else
+            visits = Visit.all
+        end
+        # binding.pry
+        render json: VisitSerializer.new(visits).to_serialized_json()
+    end
+    
     def create
         user = User.find_or_create_by(user_params)
         business = Business.find_by(id: business_params[:id])

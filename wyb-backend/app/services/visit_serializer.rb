@@ -6,8 +6,8 @@ class VisitSerializer
 
     def to_serialized_json
         options = {
-            include: [:user => {except: [:created_at, :updated_at]}],
-            except: [:created_at, :updated_at]
+            include: {:user => {except: [:created_at, :updated_at]}, :business => {except: [:created_at, :updated_at]}},
+            only: [:id, :time_in, :time_out, :employee, :party_size, :business_id, :user_id]
         }
         @visit.to_json(options)
     end
