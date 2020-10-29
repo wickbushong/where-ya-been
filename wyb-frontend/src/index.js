@@ -1,6 +1,15 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateForm(), fetchBusinesses())
+document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateTabs(), activateForm(), fetchBusinesses())
+
+function activateTabs() {
+    let tabs = document.querySelectorAll(".nav-tab")
+    for (const tab of tabs) {
+        tab.addEventListener("click", e => {
+            toggleTabs(e.target)
+        })
+    }
+}
 
 function createCurrentList(visits) {
     for (const visit of visits) {
@@ -42,11 +51,11 @@ function setBusiness(e) {
     list.setAttribute("data-business-id", `${businessId}`)
 }
 
-function toggleTabs() {
-    let old = event.target.closest("ul").querySelector(".active")
+function toggleTabs(clickedTab) {
+    let old = clickedTab.closest("ul").querySelector(".active")
     old.className = "nav-link"
-    event.target.className += " active"
-    let pageGroup = event.target.dataset.pageGroup
+    clickedTab.className += " active"
+    let pageGroup = clickedTab.dataset.pageGroup
     let allPages = document.querySelectorAll(".container")
     for (const page of allPages) {page.style.display = "none"}
     let newPage = document.querySelector(`[data-page-group="${pageGroup}"].container`)

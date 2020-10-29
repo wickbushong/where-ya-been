@@ -19,7 +19,7 @@ class Visit {
         let btn = document.createElement("button")
         btn.className = "btn btn-outline-danger btn-sm float-right"
         btn.innerHTML = "CHECK OUT"
-        btn.addEventListener("click", e => postCheckOut(e.target.parentElement.dataset.visitId))
+        btn.addEventListener("click", e => Visit.postCheckOut(e.target.parentElement.dataset.visitId))
         li.appendChild(btn)
         ul.appendChild(li)
     }
