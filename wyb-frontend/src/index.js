@@ -1,37 +1,21 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", console.log("loaded"), activateBusinessSelect(), activateForm(), fetchBusinesses())
+document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateForm(), fetchBusinesses())
 
 function fetchActiveVisits(businessId) {
-    fetch(BACKEND_URL+`/businesses/${businessId}`)
+    fetch(BACKEND_URL+`/businesses/${businessId}/visits`)
         .then(response => response.json())
-            .then(data => createCurrentList(data["active_visits"]))
+            .then(data => createCurrentList(data))
                 .catch(err => console.log(err));
-}
-
-function appendVisitToCurrentList(visit) {
-    let ul = document.querySelector("#current-list")
-    let li = document.createElement("li")
-    li.className = "list-group-item"
-    li.setAttribute("data-visit-id", `${visit.id}`)
-    li.setAttribute("data-user-id", `${visit.user.id}`)
-    li.innerHTML = `${visit.user.first_name} ${visit.user.last_name}`
-    let btn = document.createElement("button")
-    btn.className = "btn btn-outline-danger btn-sm float-right"
-    btn.innerHTML = "CHECK OUT"
-    btn.addEventListener("click", e => postCheckOut(e))
-    li.appendChild(btn)
-    ul.appendChild(li)
 }
 
 function createCurrentList(visits) {
     for (const visit of visits) {
-        appendVisitToCurrentList(visit)
+        new Visit(visit).appendVisitToCurrentList()
     }
 }
 
 function postCheckOut(e) {
-    console.log("hit postCheckout")
     const visitId = e.target.parentElement.dataset.visitId
     fetch(`http://localhost:3000/visits/${visitId}`, {
             method: 'PATCH',
@@ -52,7 +36,6 @@ function removeFromList(id) {
 }
 
 function activateForm() {
-    console.log("hit activateForm")
     let form = document.querySelector("#check-in-form")
     form.addEventListener("submit", e => {
         e.preventDefault
@@ -62,7 +45,6 @@ function activateForm() {
 }
 
 function postCheckIn(e) {
-    console.log("hit postCheckIn")
     const form = e.target
     const businessId = document.querySelector("#current-list").dataset.businessId
     const formData = {
@@ -86,7 +68,7 @@ function postCheckIn(e) {
         })
         .then(response => response.json())
             .then(result => {
-                appendVisitToCurrentList(result)
+                new Visit(result).appendVisitToCurrentList()
             })
                 .catch(err => console.log(err))
 }
