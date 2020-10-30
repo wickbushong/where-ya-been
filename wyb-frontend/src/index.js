@@ -34,7 +34,3 @@ function clearCurrentList() {
         list.removeChild(list.firstChild)
     }
 }
-
-function activateReportForm() {
-    document.querySelector("#report-nav").className = "nav-link nav-tab"
-}

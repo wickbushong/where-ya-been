@@ -48,7 +48,7 @@ class Business {
         this.fetchActiveVisits()
         let list = document.querySelector("#current-list")
         list.setAttribute("data-business-id", `${this.id}`)
-        activateReportForm()
+        Report.activateTab()
         toggleTabs(document.querySelector("#visit-log-nav"))
     }
 
