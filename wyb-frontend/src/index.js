@@ -17,11 +17,6 @@ function createCurrentList(visits) {
     }
 }
 
-function removeFromList(id) {
-    const li = document.querySelector(`[data-visit-id="${id}"]`)
-    li.remove()
-}
-
 function toggleTabs(clickedTab) {
     let old = clickedTab.closest("ul").querySelector(".active")
     old.className = "nav-link"
