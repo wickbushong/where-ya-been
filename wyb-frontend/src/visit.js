@@ -79,7 +79,12 @@ class Visit {
                 body: JSON.stringify({id: `${this.id}`})
             })
             .then(response => response.json())
-                .then(result => console.log(removeFromList(result["id"])))
+                .then(result => new Visit(result).removeFromList())
                     .catch(err => console.log(err))
+    }
+
+    removeFromList() {
+        const li = document.querySelector(`[data-visit-id="${this.id}"]`)
+        li.remove()
     }
 }
