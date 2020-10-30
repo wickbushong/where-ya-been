@@ -9,8 +9,8 @@ class Business {
         this.visits = business_object["visits"]
     }
 
-    static fetchActiveVisits(businessId) {
-        fetch(BACKEND_URL+`/businesses/${businessId}/visits`)
+    fetchActiveVisits() {
+        fetch(BACKEND_URL+`/businesses/${this.id}/visits`)
             .then(response => response.json())
                 .then(data => createCurrentList(data))
                     .catch(err => console.log(err));
