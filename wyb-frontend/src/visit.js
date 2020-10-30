@@ -9,21 +9,6 @@ class Visit {
         this.business = visit_obj["business"]
     }
 
-    appendVisitToCurrentList() {
-        let ul = document.querySelector("#current-list")
-        let li = document.createElement("li")
-        li.className = "list-group-item"
-        li.setAttribute("data-visit-id", `${this.id}`)
-        li.setAttribute("data-user-id", `${this.user.id}`)
-        li.innerHTML = `${this.user.first_name} ${this.user.last_name}`
-        let btn = document.createElement("button")
-        btn.className = "btn btn-outline-danger btn-sm float-right"
-        btn.innerHTML = "CHECK OUT"
-        btn.addEventListener("click", e => Visit.postCheckOut(e.target.parentElement.dataset.visitId))
-        li.appendChild(btn)
-        ul.appendChild(li)
-    }
-
     static activateForm() {
         let form = document.querySelector("#check-in-form")
         form.addEventListener("submit", e => {
@@ -66,14 +51,32 @@ class Visit {
                     .catch(err => console.log(err))
     }
 
-    static postCheckOut(visitId) {
-        fetch(`http://localhost:3000/visits/${visitId}`, {
+    appendVisitToCurrentList() {
+        let ul = document.querySelector("#current-list")
+        let li = document.createElement("li")
+        li.className = "list-group-item"
+        li.setAttribute("data-visit-id", `${this.id}`)
+        li.setAttribute("data-user-id", `${this.user.id}`)
+        li.innerHTML = `${this.user.first_name} ${this.user.last_name}`
+        let btn = document.createElement("button")
+        btn.className = "btn btn-outline-danger btn-sm float-right"
+        btn.innerHTML = "CHECK OUT"
+        btn.addEventListener("click", e => {
+            const visit = new Visit({id: e.target.parentElement.dataset.visitId, user_id: e.target.parentElement.dataset.userId})
+            visit.postCheckOut()
+        })
+        li.appendChild(btn)
+        ul.appendChild(li)
+    }
+
+    postCheckOut() {
+        fetch(`http://localhost:3000/visits/${this.id}`, {
                 method: 'PATCH',
                 headers:  {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
-                body: JSON.stringify({time_out: "true", id: `${visitId}`})
+                body: JSON.stringify({id: `${this.id}`})
             })
             .then(response => response.json())
                 .then(result => console.log(removeFromList(result["id"])))
