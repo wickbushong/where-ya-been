@@ -37,24 +37,24 @@ class Business {
     
     static populateSelect(businessList) {
         for (const business of businessList) {
-            this.appendOption(business)
+            const b = new Business(business)
+            b.appendOption()
         }
     }
 
-    static appendOption(business) {
+    appendOption() {
         let select = document.querySelector("select")
         let option = document.createElement("option")
-        option.setAttribute("data-business-id", `${business.id}`)
-        option.innerHTML = `${business.name} - ${business.location}`
+        option.setAttribute("data-business-id", `${this.id}`)
+        option.innerHTML = `${this.name} - ${this.location}`
         select.appendChild(option)
     }
 
     select() {
         clearCurrentList()
-        debugger
-        this.fetchActiveVisits(businessId)
+        this.fetchActiveVisits()
         let list = document.querySelector("#current-list")
-        list.setAttribute("data-business-id", `${businessId}`)
+        list.setAttribute("data-business-id", `${this.id}`)
         toggleTabs(document.querySelector("#visit-log-nav"))
     }
 }
