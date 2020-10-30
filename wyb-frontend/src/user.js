@@ -15,13 +15,14 @@ class User {
     }
 
     static populateSelect(userList) {
+        let select = document.querySelector("#user-select-field")
         for (const user of userList) {
             const u = new User(user)
-            u.appendOptionToSelect()
+            u.appendOptionTo(select)
         }
     }
     
-    appendOptionToSelect() {
+    appendOptionTo(select) {
         let select = document.querySelector("#user-select-field")
         let option = document.createElement("option")
         option.

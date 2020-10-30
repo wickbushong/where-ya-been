@@ -29,14 +29,14 @@ class Business {
     }
     
     static populateSelect(businessList) {
+        let select = document.querySelector("select")
         for (const business of businessList) {
             const b = new Business(business)
-            b.appendOptionToSelect()
+            b.appendOptionTo(select)
         }
     }
 
-    appendOptionToSelect() {
-        let select = document.querySelector("select")
+    appendOptionTo(select) {
         let option = document.createElement("option")
         option.setAttribute("data-business-id", `${this.id}`)
         option.innerHTML = `${this.name} - ${this.location}`
