@@ -23,8 +23,9 @@ class User {
     }
     
     appendOptionTo(select) {
-        let select = document.querySelector("#user-select-field")
         let option = document.createElement("option")
-        option.
+        option.setAttribute("data-user-id", this.id)
+        option.innerHTML = `${this.first_name} ${this.last_name} - ${this.phone}`
+        select.appendChild(option)
     }
 }
