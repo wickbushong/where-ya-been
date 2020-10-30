@@ -24,6 +24,15 @@ class Visit {
         ul.appendChild(li)
     }
 
+    static activateForm() {
+        let form = document.querySelector("#check-in-form")
+        form.addEventListener("submit", e => {
+            e.preventDefault
+            Visit.postCheckIn(e.target)
+            e.target.reset()
+        })
+    }
+
     static postCheckIn(form) {
         const businessId = document.querySelector("#current-list").dataset.businessId
         const formData = {

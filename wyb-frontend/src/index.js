@@ -11,15 +11,6 @@ function activateTabs() {
     }
 }
 
-function activateForm() {
-    let form = document.querySelector("#check-in-form")
-    form.addEventListener("submit", e => {
-        e.preventDefault
-        Visit.postCheckIn(e.target)
-        e.target.reset()
-    })
-}
-
 function createCurrentList(visits) {
     for (const visit of visits) {
         new Visit(visit).appendVisitToCurrentList()
