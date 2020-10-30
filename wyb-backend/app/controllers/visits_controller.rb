@@ -7,7 +7,7 @@ class VisitsController < ApplicationController
         else
             visits = Visit.all
         end
-        # binding.pry
+
         render json: VisitSerializer.new(visits).to_serialized_json()
     end
     
