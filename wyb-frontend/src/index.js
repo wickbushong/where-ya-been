@@ -24,7 +24,7 @@ function activateBusinessSelect() {
     let form = document.querySelector("#business-select-form")
     form.addEventListener("submit", e => {
         e.preventDefault
-        setBusiness(e)
+        Business.select(e)
         e.target.reset()
         // SWITCH TO LOG TAB
     })
@@ -39,16 +39,6 @@ function createCurrentList(visits) {
 function removeFromList(id) {
     const li = document.querySelector(`[data-visit-id="${id}"]`)
     li.remove()
-}
-
-function setBusiness(e) {
-    let select = e.target.querySelector("select")
-    let selectedOption = select.item(select.selectedIndex)
-    let businessId = selectedOption.dataset.businessId
-    clearCurrentList()
-    Business.fetchActiveVisits(businessId)
-    let list = document.querySelector("#current-list")
-    list.setAttribute("data-business-id", `${businessId}`)
 }
 
 function toggleTabs(clickedTab) {

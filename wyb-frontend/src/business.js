@@ -36,4 +36,14 @@ class Business {
         option.innerHTML = `${business.name} - ${business.location}`
         select.appendChild(option)
     }
+
+    static select(e) {
+        let select = e.target.querySelector("select")
+        let selectedOption = select.item(select.selectedIndex)
+        let businessId = selectedOption.dataset.businessId
+        clearCurrentList()
+        this.fetchActiveVisits(businessId)
+        let list = document.querySelector("#current-list")
+        list.setAttribute("data-business-id", `${businessId}`)
+    }
 }
