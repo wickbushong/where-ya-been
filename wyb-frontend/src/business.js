@@ -27,9 +27,11 @@ class Business {
         let form = document.querySelector("#business-select-form")
         form.addEventListener("submit", e => {
             e.preventDefault
-            this.select(e)
+            let select = e.target.querySelector("select")
+            let selectedOption = select.item(select.selectedIndex)
+            let business = new Business({id: selectedOption.dataset.businessId})
+            business.select()
             e.target.reset()
-            // SWITCH TO LOG TAB
         })
     }
     
@@ -47,11 +49,9 @@ class Business {
         select.appendChild(option)
     }
 
-    static select(e) {
-        let select = e.target.querySelector("select")
-        let selectedOption = select.item(select.selectedIndex)
-        let businessId = selectedOption.dataset.businessId
+    select() {
         clearCurrentList()
+        debugger
         this.fetchActiveVisits(businessId)
         let list = document.querySelector("#current-list")
         list.setAttribute("data-business-id", `${businessId}`)
