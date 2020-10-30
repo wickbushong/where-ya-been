@@ -31,11 +31,11 @@ class Business {
     static populateSelect(businessList) {
         for (const business of businessList) {
             const b = new Business(business)
-            b.appendOption()
+            b.appendOptionToSelect()
         }
     }
 
-    appendOption() {
+    appendOptionToSelect() {
         let select = document.querySelector("select")
         let option = document.createElement("option")
         option.setAttribute("data-business-id", `${this.id}`)

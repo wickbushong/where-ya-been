@@ -6,7 +6,8 @@ class Report {
     }
 
     static activateForm() {
-        User.fetchAll()
+        const users = User.fetchAll()
+        debugger
         document.querySelector("#report-activator").style = "display: none;"
         document.querySelector("#report-body").style = "display: block;"
         
