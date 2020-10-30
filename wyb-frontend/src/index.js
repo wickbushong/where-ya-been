@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateTabs(), activateForm(), fetchBusinesses())
+document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateTabs(), activateForm(), retrieveBusinesses())
 
 function activateTabs() {
     let tabs = document.querySelectorAll(".nav-tab")
@@ -9,17 +9,6 @@ function activateTabs() {
             toggleTabs(e.target)
         })
     }
-}
-
-function createCurrentList(visits) {
-    for (const visit of visits) {
-        new Visit(visit).appendVisitToCurrentList()
-    }
-}
-
-function removeFromList(id) {
-    const li = document.querySelector(`[data-visit-id="${id}"]`)
-    li.remove()
 }
 
 function activateForm() {
@@ -39,6 +28,17 @@ function activateBusinessSelect() {
         e.target.reset()
         // SWITCH TO LOG TAB
     })
+}
+
+function createCurrentList(visits) {
+    for (const visit of visits) {
+        new Visit(visit).appendVisitToCurrentList()
+    }
+}
+
+function removeFromList(id) {
+    const li = document.querySelector(`[data-visit-id="${id}"]`)
+    li.remove()
 }
 
 function setBusiness(e) {
@@ -62,25 +62,8 @@ function toggleTabs(clickedTab) {
     newPage.style.display = "block"
 }
 
-function fetchBusinesses() {
-    fetch(`http://localhost:3000/businesses`)
-    .then(response => response.json())
-        .then(businessList => populateBusinessSelect(businessList))
-            .catch(err => console.log(err))
-}
-
-function populateBusinessSelect(businessList) {
-    for (const business of businessList) {
-        appendBusinessOption(business)
-    }
-}
-
-function appendBusinessOption(business) {
-    let select = document.querySelector("select")
-    let option = document.createElement("option")
-    option.setAttribute("data-business-id", `${business.id}`)
-    option.innerHTML = `${business.name} - ${business.location}`
-    select.appendChild(option)
+function retrieveBusinesses() {
+    Business.fetchAll()
 }
 
 function clearCurrentList() {
