@@ -19,7 +19,7 @@
           <a id="business-select-nav" class="nav-link nav-tab active" data-page-group="business-select" href="#">Select Business</a>
         </li>
         <li class="nav-item">
-            <a id="report-nav" class="nav-link nav-tab disabled" data-page-group="report" href="#">Select Business</a>
+            <a id="report-nav" class="nav-link nav-tab disabled" data-page-group="report" href="#">Report</a>
         </li>
     </ul>
 
@@ -90,22 +90,26 @@
 
     <!-- BEGIN REPORT FORM PAGE -->
 
-    <div id="business-select-page" class="container" data-page-group="report">
+    <div id="report-page" class="container" style="display: none;"data-page-group="report">
         <div class="row">
             <div class="col-sm">
                 <h2>REPORT FORM</h2>
                 <form id="report-form">
                     <div class="form-group">
                         <div class="input-group">
-                            <select class="form-control" id="business-select-field">
-                                <option selected>Choose your business</option>
+                            <select class="form-control" id="user-select-field">
+                                <option selected>CHOOSE USER</option>
                             </select>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="col-sm">
-
+                <h2>OVERLAPPING VISITORS</h2>
+                <label for="overlap-list">NAME - PHONE</label>
+                <ul class="list-group" id="overlap-list">
+                    
+                  </ul>
             </div>
         </div>
     </div>
