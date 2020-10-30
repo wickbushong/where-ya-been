@@ -63,14 +63,16 @@ Visit.create(
 Visit.create(
     user_id: 1,
     business_id: 1,
-    time_in: Time.now,
+    time_in: Time.now - 20000,
+    time_out: Time.now - 19500,
     party_size: 2
 )
 
 Visit.create(
     user_id: 4,
     business_id: 1,
-    time_in: Time.now,
+    time_in: Time.now - 500,
+    time_out: Time.now,
     party_size: 2
 )
 

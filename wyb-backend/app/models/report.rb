@@ -13,4 +13,5 @@ class Report < ApplicationRecord
         end
         return to_flag
     end
+
 end

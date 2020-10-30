@@ -1,8 +1,9 @@
 class ReportsController < ApplicationController
     def create
-        binding.pry
         report = Report.create(report_params)
-        report.flag_visits
+        flagged = report.flag_visits
+        binding.pry
+
     end
 
     private
