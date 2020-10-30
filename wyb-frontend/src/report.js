@@ -7,11 +7,16 @@ class Report {
 
     static activateForm() {
         User.fetchAll()
+        let form = document.querySelector("#report-form form")
+        form.addEventListener("submit", e => {
+            e.preventDefault()
+            debugger
+        })
         document.querySelector("#report-activator").style = "display: none;"
         document.querySelector("#report-body").style = "display: block;"
-        
-        
     }
 
+    post() {
 
+    }
 }

@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", Business.fetchAll(), Business.activateSelect(), activateTabs(), Visit.activateForm())
+document.addEventListener("DOMContentLoaded", Business.fetchAll(), Business.activateSelect(), activateTabs(), Visit.activateForm(), Report.activateTab())
 
 function activateTabs() {
     let tabs = document.querySelectorAll(".nav-tab")
