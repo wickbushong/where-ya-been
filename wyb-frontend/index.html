@@ -18,8 +18,13 @@
         <li class="nav-item">
           <a id="business-select-nav" class="nav-link nav-tab active" data-page-group="business-select" href="#">Select Business</a>
         </li>
-        
+        <li class="nav-item">
+            <a id="report-nav" class="nav-link nav-tab disabled" data-page-group="report" href="#">Select Business</a>
+        </li>
     </ul>
+
+    <!-- BEGIN VISIT LOG PAGE -->
+
     <div id="visit-log-page" class="container" style="display: none;" data-page-group="visit-log" >
         <div class="row">
             <div class="col-sm">
@@ -57,7 +62,7 @@
         </div>
     </div>
 
-    <!-- NEW TAB -->
+    <!--  BEGIN BUSINESS SELECT PAGE -->
 
     <div id="business-select-page" class="container" data-page-group="business-select">
         <div class="row">
@@ -78,6 +83,29 @@
                     </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- BEGIN REPORT FORM PAGE -->
+
+    <div id="business-select-page" class="container" data-page-group="report">
+        <div class="row">
+            <div class="col-sm">
+                <h2>REPORT FORM</h2>
+                <form id="report-form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-control" id="business-select-field">
+                                <option selected>Choose your business</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm">
+
             </div>
         </div>
     </div>

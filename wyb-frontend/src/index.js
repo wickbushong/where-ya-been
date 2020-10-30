@@ -19,7 +19,7 @@ function createCurrentList(visits) {
 
 function toggleTabs(clickedTab) {
     let old = clickedTab.closest("ul").querySelector(".active")
-    old.className = "nav-link"
+    old.className = "nav-link nav-tab"
     clickedTab.className += " active"
     let pageGroup = clickedTab.dataset.pageGroup
     let allPages = document.querySelectorAll(".container")
@@ -33,4 +33,8 @@ function clearCurrentList() {
     while (list.firstChild) {
         list.removeChild(list.firstChild)
     }
+}
+
+function activateReportForm() {
+    document.querySelector("#report-nav").className = "nav-link nav-tab"
 }
