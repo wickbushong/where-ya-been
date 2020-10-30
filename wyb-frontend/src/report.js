@@ -6,12 +6,12 @@ class Report {
     }
 
     static activateForm() {
-        
+        User.fetchAll()
         document.querySelector("#report-activator").style = "display: none;"
         document.querySelector("#report-body").style = "display: block;"
         
         
     }
 
-    
+
 }

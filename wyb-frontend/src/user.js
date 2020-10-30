@@ -8,6 +8,6 @@ class User {
     }
 
     static fetchVisitsNear(date) {
-
+        
     }
 }
