@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
     def create
         report = Report.create(report_params)
         flagged = report.flag_visits
+        
         binding.pry
 
     end

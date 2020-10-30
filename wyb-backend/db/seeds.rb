@@ -52,35 +52,50 @@ User.create(
     email: "robby@cowan.com"
 )
 
-Visit.create(
-    user_id: 1,
-    business_id: 1,
-    time_in: Time.now - 86400,
-    time_out: Time.now - 85000,
-    party_size: 2
+User.create(
+    first_name: "Haley",
+    last_name: "Lyerly",
+    phone: "1111111111",
+    email: "haley@lyerly.com"
 )
 
-Visit.create(
-    user_id: 1,
-    business_id: 1,
-    time_in: Time.now - 20000,
-    time_out: Time.now - 19500,
-    party_size: 2
-)
+seconds = [86400, 172800, 259200, 345600, 432000, 518400, 604800, 691200, 777600, 864000, 950400, 1036800, 1123200, 
+1209600, 129600, 1382400]
+past16days = seconds.map do |s|
+    Time.now - s
+end
+
+past16days.each do |d|
+    Visit.create(
+        user_id: 1,
+        business_id: 1,
+        time_in: d,
+        time_out: d + 3600,
+        party_size: 2
+    )
+end
+
+# Visit.create(
+#     user_id: 1,
+#     business_id: 1,
+#     time_in: Time.now - 20000,
+#     time_out: Time.now - 19500,
+#     party_size: 2
+# )
 
 Visit.create(
     user_id: 4,
     business_id: 1,
-    time_in: Time.now - 500,
-    time_out: Time.now,
+    time_in: Time.now - 86400,
+    time_out: Time.now - 85400,
     party_size: 2
 )
 
 Visit.create(
     user_id: 3,
     business_id: 1,
-    time_in: Time.now - 3600,
-    time_out: Time.now - 1800,
+    time_in: Time.now - 88000,
+    time_out: Time.now - 86000,
     party_size: 3
 )
 
@@ -92,6 +107,44 @@ Visit.create(
     party_size: 5
 )
 
+Visit.create(
+    user_id: 2,
+    business_id: 1,
+    time_in: Time.now - 2400,
+    time_out: Time.now - 1200,
+    party_size: 5
+)
+
+Visit.create(
+    user_id: 2,
+    business_id: 1,
+    time_in: Time.now - 346000,
+    time_out: Time.now - 345000,
+    party_size: 5
+)
+
+Visit.create(
+    user_id: 3,
+    business_id: 1,
+    time_in: Time.now - 346000,
+    time_out: Time.now - 345000,
+    party_size: 5
+)
+
+Visit.create(
+    user_id: 2,
+    business_id: 1,
+    time_in: Time.now,
+    party_size: 5
+)
+
+Visit.create(
+    user_id: 5,
+    business_id: 1,
+    time_in: Time.now - 10000,
+    time_out: Time.now - 9500,
+    party_size: 5
+)
 
 
 
