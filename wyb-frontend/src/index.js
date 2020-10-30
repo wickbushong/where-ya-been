@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", activateBusinessSelect(), activateTabs(), activateForm(), retrieveBusinesses())
+document.addEventListener("DOMContentLoaded", Business.fetchAll(), Business.activateSelect(), activateTabs(), Visit.activateForm())
 
 function activateTabs() {
     let tabs = document.querySelectorAll(".nav-tab")
@@ -17,16 +17,6 @@ function activateForm() {
         e.preventDefault
         Visit.postCheckIn(e.target)
         e.target.reset()
-    })
-}
-
-function activateBusinessSelect() {
-    let form = document.querySelector("#business-select-form")
-    form.addEventListener("submit", e => {
-        e.preventDefault
-        Business.select(e)
-        e.target.reset()
-        // SWITCH TO LOG TAB
     })
 }
 
@@ -50,10 +40,6 @@ function toggleTabs(clickedTab) {
     for (const page of allPages) {page.style.display = "none"}
     let newPage = document.querySelector(`[data-page-group="${pageGroup}"].container`)
     newPage.style.display = "block"
-}
-
-function retrieveBusinesses() {
-    Business.fetchAll()
 }
 
 function clearCurrentList() {

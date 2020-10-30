@@ -23,6 +23,16 @@ class Business {
                     .catch(err => console.log(err))
     }
 
+    static activateSelect() {
+        let form = document.querySelector("#business-select-form")
+        form.addEventListener("submit", e => {
+            e.preventDefault
+            this.select(e)
+            e.target.reset()
+            // SWITCH TO LOG TAB
+        })
+    }
+    
     static populateSelect(businessList) {
         for (const business of businessList) {
             this.appendOption(business)
