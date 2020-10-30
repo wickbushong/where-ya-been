@@ -9,13 +9,6 @@ class Business {
         this.visits = business_object["visits"]
     }
 
-    fetchActiveVisits() {
-        fetch(BACKEND_URL+`/businesses/${this.id}/visits`)
-            .then(response => response.json())
-                .then(data => createCurrentList(data))
-                    .catch(err => console.log(err));
-    }
-
     static fetchAll() {
         fetch(`http://localhost:3000/businesses`)
             .then(response => response.json())
@@ -56,5 +49,12 @@ class Business {
         let list = document.querySelector("#current-list")
         list.setAttribute("data-business-id", `${this.id}`)
         toggleTabs(document.querySelector("#visit-log-nav"))
+    }
+
+    fetchActiveVisits() {
+        fetch(BACKEND_URL+`/businesses/${this.id}/visits`)
+            .then(response => response.json())
+                .then(data => createCurrentList(data))
+                    .catch(err => console.log(err));
     }
 }
