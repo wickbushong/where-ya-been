@@ -6,7 +6,7 @@ class Visit {
         this.time_in = visit_obj["time_in"]
         this.time_out = visit_obj["time_out"]
         this.user = visit_obj["user"]
-        this.business = visit_obj["user"]
+        this.business = visit_obj["business"]
     }
 
     appendVisitToCurrentList() {
@@ -27,13 +27,13 @@ class Visit {
     static activateForm() {
         let form = document.querySelector("#check-in-form")
         form.addEventListener("submit", e => {
-            e.preventDefault
-            Visit.postCheckIn(e.target)
+            e.preventDefault()
+            this.newFromForm(e.target).postCheckIn()
             e.target.reset()
         })
     }
 
-    static postCheckIn(form) {
+    static newFromForm(form) {
         const businessId = document.querySelector("#current-list").dataset.businessId
         const formData = {
             user: {
@@ -46,13 +46,18 @@ class Visit {
                 id: `${businessId}`
             }
         }
+        const visit = new Visit(formData)
+        return visit
+    }
+
+    postCheckIn() {
         fetch(`http://localhost:3000/visits`, {
                 method: 'POST',
                 headers:  {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(this)
             })
             .then(response => response.json())
                 .then(result => {

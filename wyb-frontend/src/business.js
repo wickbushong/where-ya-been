@@ -55,5 +55,6 @@ class Business {
         this.fetchActiveVisits(businessId)
         let list = document.querySelector("#current-list")
         list.setAttribute("data-business-id", `${businessId}`)
+        toggleTabs(document.querySelector("#visit-log-nav"))
     }
 }
