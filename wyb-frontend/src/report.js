@@ -66,10 +66,5 @@ class Report {
             let visit = new Visit(flagged)
             visit.extractOverlapDates()
         }
-        // THEN iterate through overlap_visits within flag_visits
-
-        // add dates to users_to_notify that indicate date of visit
     }
-
-
 }
