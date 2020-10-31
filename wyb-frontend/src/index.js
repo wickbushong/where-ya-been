@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000';
 
-document.addEventListener("DOMContentLoaded", Business.fetchAll(), Business.activateSelect(), activateTabs(), Visit.activateForm(), Report.activateTab())
+document.addEventListener("DOMContentLoaded", Business.fetchAll(), Business.activateSelect(), Report.activateTab(), activateTabs(), Visit.activateForm())
 
 function activateTabs() {
     let tabs = document.querySelectorAll(".nav-tab")
@@ -20,7 +20,7 @@ function createCurrentList(visits) {
 function toggleTabs(clickedTab) {
     let old = clickedTab.closest("ul").querySelector(".active")
     old.className = "nav-link nav-tab"
-    clickedTab.classList + "active"
+    clickedTab.classList.add("active")
     let pageGroup = clickedTab.dataset.pageGroup
     let allPages = document.querySelectorAll(".container")
     for (const page of allPages) {page.style.display = "none"}
@@ -39,4 +39,8 @@ function setAttributes(el, attrs) {
     for(var key in attrs) {
       el.setAttribute(key, attrs[key]);
     }
+  }
+
+  function switchToLogPage() {
+      debugger
   }

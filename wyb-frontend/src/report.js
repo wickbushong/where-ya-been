@@ -8,7 +8,7 @@ class Report {
     }
 
     static activateTab() {
-        document.querySelector("#report-nav").className = "nav-link nav-tab"
+        // document.querySelector("#report-nav").className = "nav-link nav-tab"
         document.querySelector("#report-activator").addEventListener("click", e => this.activateForm())
     }
 
@@ -23,7 +23,7 @@ class Report {
             let date = e.target.querySelector("input")
             let button = e.target.querySelector("button")
             button.innerHTML = "REPORT SUBMITTED"
-            button.classList + "disabled"
+            button.classList.add("disabled")
             button.disabled = true
             select.disabled = true
             date.disabled = true
