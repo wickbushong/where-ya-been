@@ -3,6 +3,8 @@ class Report {
         this.id = report_obj["id"]
         this.user_id = report_obj["user_id"]
         this.test_date = report_obj["test_date"]
+        this.flag_visits = report_obj["flag_visits"]
+        this.users_to_notify = report_obj["users_to_notify"]
     }
 
     static activateTab() {
@@ -21,7 +23,7 @@ class Report {
             let date = e.target.querySelector("input")
             let button = e.target.querySelector("button")
             button.innerHTML = "REPORT SUBMITTED"
-            button.className += " disabled"
+            button.classList + "disabled"
             button.disabled = true
             select.disabled = true
             date.disabled = true
@@ -43,8 +45,27 @@ class Report {
             })
             .then(response => response.json())
                 .then(result => {
-                    debugger
+                    let report = new Report(result)
+                    
+                    report.createContactList()
+                    document.querySelector("#overlap-list").style = "display: block;"
                 })
                     .catch(err => console.log(err))
     }
+
+    createContactList() {
+        let list = document.querySelector("#overlap-list ul")
+        // iterate through users_to_notify
+        for (const user of this.users_to_notify) {
+            new User(user).appendContactTo(list)
+        }
+        // append their name and contact info to list
+
+        // THEN iterate through overlap_visits within flag_visits
+
+        // add dates to users_to_notify that indicate date of visit
+
+    }
+
+
 }
