@@ -48,6 +48,7 @@ class Report {
                     let report = new Report(result)
                     
                     report.createContactList()
+                    report.populateContactDates()
                     document.querySelector("#overlap-list").style = "display: block;"
                 })
                     .catch(err => console.log(err))
@@ -55,16 +56,19 @@ class Report {
 
     createContactList() {
         let list = document.querySelector("#overlap-list ul")
-        // iterate through users_to_notify
         for (const user of this.users_to_notify) {
             new User(user).appendContactTo(list)
         }
-        // append their name and contact info to list
+    }
 
+    populateContactDates() {
+        for (const flagged of this.flag_visits) {
+            let visit = new Visit(flagged)
+            visit.extractOverlapDates()
+        }
         // THEN iterate through overlap_visits within flag_visits
 
         // add dates to users_to_notify that indicate date of visit
-
     }
 
 

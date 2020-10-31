@@ -7,6 +7,7 @@ class Visit {
         this.time_out = visit_obj["time_out"]
         this.user = visit_obj["user"]
         this.business = visit_obj["business"]
+        this.overlap_visits = visit_obj["overlap_visits"]
     }
 
     static activateForm() {
@@ -86,5 +87,17 @@ class Visit {
     removeFromList() {
         const li = document.querySelector(`[data-visit-id="${this.id}"]`)
         li.remove()
+    }
+
+    extractOverlapDates() {
+        for (const overlap of this.overlap_visits) {
+            let visit = new Visit(overlap)
+            visit.addDateToContact()
+        }
+    }
+
+    addDateToContact() {
+        let date = new Date(this.time_in)
+        document.querySelector(`#overlap-list [data-user-id="${this.user_id}"]`).innerHTML += ` *${date.getMonth()}/${date.getDate()}/${date.getFullYear()}* `
     }
 }
