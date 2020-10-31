@@ -2,7 +2,6 @@ class ReportsController < ApplicationController
     def create
         report = Report.create(report_params)
         render json: ReportSerializer.new(report).to_serialized_json()
-
     end
 
     private
