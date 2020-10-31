@@ -1,9 +1,11 @@
 class ReportsController < ApplicationController
     def create
         report = Report.create(report_params)
-        flagged = report.flag_visits
-        
-        binding.pry
+        # flagged = report.flag_visits
+        # users = flagged.map do |v|
+        #     v.overlap_users
+        # end
+        render json: ReportSerializer.new(report).to_serialized_json()
 
     end
 

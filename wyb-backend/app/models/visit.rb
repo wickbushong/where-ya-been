@@ -11,4 +11,11 @@ class Visit < ApplicationRecord
       !(check_out < flagged_in) && !(check_in > flagged_out) && v != self
     end
   end
+
+  def overlap_users
+    users = self.overlap_visits.map do |v|
+      v.user
+    end
+    users.uniq
+  end
 end

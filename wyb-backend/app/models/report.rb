@@ -14,4 +14,11 @@ class Report < ApplicationRecord
         return to_flag
     end
 
+    def users_to_notify
+        flagged = self.flag_visits
+        flagged.map do |v|
+            v.overlap_users
+        end.flatten.uniq
+    end
+
 end

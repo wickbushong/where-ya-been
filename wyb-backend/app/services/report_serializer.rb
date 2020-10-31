@@ -6,11 +6,7 @@ class ReportSerializer
 
     def to_serialized_json
         options = {
-            include: {
-                user: {
-                    include: [:flagged_visits => {include:[:overlap_visits], except: [:created_at, :updated_at]}]
-                }
-            },
+            :include => [:users_to_notify],
             except: [:created_at, :updated_at]
         }
         @report.to_json(options)
