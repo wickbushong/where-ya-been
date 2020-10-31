@@ -34,28 +34,28 @@ User.create(
 User.create(
     first_name: "Margaret",
     last_name: "Long",
-    phone: "7138262161",
-    email: "long.mkat@gmail.com"
+    phone: "2222222222",
+    email: "margaret@long.com"
 )
 
 User.create(
     first_name: "Matt",
     last_name: "Logan",
-    phone: "1234567890",
+    phone: "3333333333",
     email: "matt@logan.com"
 )
 
 User.create(
     first_name: "Robby",
     last_name: "Cowan",
-    phone: "9876543210",
+    phone: "4444444444",
     email: "robby@cowan.com"
 )
 
 User.create(
     first_name: "Haley",
     last_name: "Lyerly",
-    phone: "1111111111",
+    phone: "5555555555",
     email: "haley@lyerly.com"
 )
 
