@@ -18,8 +18,15 @@ class Report {
             let select = e.target.querySelector("select")
             let selectedUser = select.item(select.selectedIndex)
             let userId = selectedUser.dataset.userId
-            let date = e.target.querySelector("input").value
-            new this({test_date: date, user_id: userId}).post()
+            let date = e.target.querySelector("input")
+            let button = e.target.querySelector("button")
+            button.innerHTML = "REPORT SUBMITTED"
+            button.className += " disabled"
+            button.disabled = true
+            select.disabled = true
+            date.disabled = true
+            new this({test_date: date.value, user_id: userId}).post()
+            
         })
         document.querySelector("#report-activator").style = "display: none;"
         document.querySelector("#report-body").style = "display: block;"
@@ -36,7 +43,7 @@ class Report {
             })
             .then(response => response.json())
                 .then(result => {
-                    console.log(result)
+                    debugger
                 })
                     .catch(err => console.log(err))
     }
